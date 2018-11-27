@@ -2,20 +2,37 @@
 
 while read -r line || [[ -n "$line" ]]
 do
-	curr=$(echo $line | rev | cut -d" " -f2- | rev)
-	nb=$(echo $line | rev | cut -d" " -f1 | rev)
+	end="${line: -1}"
 
-	if [ "$prev" != "$curr" ]
+	if [[ "$end" =~ [0-9] ]]
 	then
-		if [ "$prev" != "" ]
+		curr=$(echo $line | rev | cut -d" " -f2- | rev)
+		nb=$(echo $line | rev | cut -d" " -f1 | rev)
+
+		if [ "$prev" != "$curr" ]
 		then
-			echo
+			if [ "$prev" != "" ]
+			then
+				echo
+			fi
+			echo -n "$curr;$nb;"
+			prev=$curr
+		else
+			echo -n "$nb;"
 		fi
-		echo -n "$curr;$nb;"
-		prev=$curr
 	else
-		echo -n "$nb;"
+		curr=$line
+		if [ "$prev" != "$curr" ]
+		then
+			if [ "$prev" != "" ]
+			then
+				echo
+			fi
+			echo -n "$curr;"
+			prev=$curr
+		fi
 	fi
 
 done < <(sort "$1")
+echo
 

@@ -30,7 +30,7 @@ do
 	do
 		nb=$(( $j * $nbX + $i ))
 		convert "$input" -crop $(($xcut - $x2))\x$ycut+$(($i * $xcut + $x2))+$(($j * $ycut)) "$1-res$nb.png"
-		tesseract "$1-res$nb.png" stdout -l "$lang" | tr "\n" " " | tr -d ",\|&#" | tr -s " " | sed -e 's/^\s*//g;s/\s*$//g'
+		tesseract "$1-res$nb.png" stdout -l "$lang" | tr "\n" " " | tr -d ",\|&#:" | sed -e 's/\+1//g' | tr -s " " | sed -e 's/^\s*//g;s/\s*$//g'
 		echo
 	done
 done
