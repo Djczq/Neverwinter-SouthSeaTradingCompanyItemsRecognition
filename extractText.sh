@@ -11,8 +11,7 @@ then
 	exit
 fi
 
-input="$1-input.png"
-convert "$1" -negate -fuzz 5% -trim +repage "$input"
+input="$1"
 
 id=( $(identify "$input") )
 nbX=$2
