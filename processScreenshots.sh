@@ -20,3 +20,4 @@ do
 done > output.raw 2> error.log
 
 ./textToCSV.sh output.raw > output.csv
+./textToList.sh output.raw > output.list
