@@ -1,8 +1,6 @@
 #!/bin/bash
 
-#sudo apt-get install imagemagick tesseract-ocr-fra
-lang=fra
-
+#sudo apt-get install imagemagick tesseract-ocr-fra tesseract-ocr-eng
 set -e
 
 if [ $# -ne 3 ]
@@ -33,7 +31,7 @@ do
 		output="${output%.*}"
 		output=res-$output-$nb.png
 		convert "$input" -crop $(($xcut - $x2))\x$ycut+$(($i * $xcut + $x2))+$(($j * $ycut)) "$output"
-		tesseract "$output" stdout -l "$lang" | tr "\n" " " | tr -d ",\|&#:" | sed -e 's/\+1//g' | tr -s " " | sed -e 's/^\s*//g;s/\s*$//g'
+		tesseract "$output" stdout | tr "\n" " " | tr -d ",\|&#:Æ=" | sed -e 's/\+1//g' | tr -s " " | sed -e 's/^\s*//g;s/\s*$//g'
 		echo
 	done
 done
