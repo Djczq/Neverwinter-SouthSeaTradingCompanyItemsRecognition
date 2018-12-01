@@ -17,6 +17,6 @@ do
 	output="crop-${output%.*}.png"
 	convert "$file" -crop $xcut\x$ycut+$x1+$y1 -fuzz 8% -trim +repage -interpolative-resize 250% +repage -negate "$output"
 	./extractText.sh "$output" 2 7
-done > results.txt 2> error.log
+done > output.raw 2> error.log
 
-./textToCSV.sh results.txt > results.csv
+./textToCSV.sh output.raw > output.csv
