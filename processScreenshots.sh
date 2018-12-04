@@ -7,6 +7,14 @@ then
 	exit 1
 fi
 
+inf=$2
+
+if [ $inf != "all" ] && [ $inf != "name" ]
+then
+	echo "Error : the second parameter must be 'name' or 'all' (you put '$inf')"
+	exit 1
+fi
+
 x1=160
 x2=541
 y1=215
@@ -15,7 +23,6 @@ y2=836
 xcut=$(( $x2 - $x1 ))
 ycut=$(( $y2 - $y1 ))
 
-inf=$2
 
 rm -f *png
 
